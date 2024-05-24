@@ -20,7 +20,7 @@ The Student Management System provides the following features:
 ![Student Registration](screenshots/image1.jpg)
 
 ### Admin Dashboard - Student Approval
-![Admin Dashboard](screenshots/admin_dashboard.png)
+![Admin Dashboard](screenshots/image3.jpg)
 
 ### Student Attendance Detail
 ![Student Attendance](screenshots/student_attendance_detail.png)
