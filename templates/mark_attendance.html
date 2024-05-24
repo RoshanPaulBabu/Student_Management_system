@@ -1,0 +1,178 @@
+{%extends 's_base.html'%} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mark Attendance</title>
+    <style>
+        .body {
+            width: 80%;
+            margin: 0 40px 0 auto;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        form {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        label {
+            font-size: 18px;
+            color: #333;
+        }
+        input[type="date"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
+        input[type="submit"] {
+            background-color: #6191dd;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #6191dd;
+        }
+        table {
+            width: 100%;
+            margin-top: 50px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #6191dd;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .status-button {
+            background-color: #6191dd;
+            border: none;
+            color: white;
+            padding: 10px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .status-button:hover {
+            background-color: #6191dd;
+        }
+        .message {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .detail-button {
+            display: block;
+            width: 200px;
+            height: 50px;
+            margin: 20px auto;
+            background-color: #6191dd;
+            text-align: center;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            line-height: 50px;
+            text-decoration: none;
+        }
+        .detail-button:hover {
+            background-color: #6191dd;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+    <h1>Mark Attendance</h1>
+    <form method="post" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date"><br><br>
+        {% if not attendance_marked %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Roll Number</th>
+                <th>Present</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.roll_number }}</td>
+                <td>
+                    <button type="button" class="status-button" onclick="toggleAttendance(this, '{{ student.roll_number }}')">Present</button>
+                        <input type="hidden" id="{{ student.roll_number }}" name="{{ student.roll_number }}" value="Present">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Submit">
+        {% else %}
+        <p class="message">Attendance has already been marked for this day. Click the button below to manage the attendance.</p>
+        <a href="{% url 'attendance_details' %}?date={{ date }}" class="detail-button">Manage Attendance</a>
+        {% endif %}
+    </form>
+</div>
+<script>
+    function toggleAttendance(button, roll_number) {
+        var inputField = document.getElementById(roll_number);
+        if (button.innerHTML === "Absent") {
+            button.innerHTML = "Present";
+            button.style.backgroundColor = "#2196F3";
+            inputField.value = "Present";
+        } else {
+            button.innerHTML = "Absent";
+            button.style.backgroundColor = "#f44336";
+            inputField.value = "Absent";
+        }
+    }
+</script>
+<script>
+    function validateForm() {
+    var selectedDate = document.getElementById('date').value;
+    var today = new Date().toISOString().slice(0, 10);
+
+    // Check if a date is selected
+    if (!selectedDate) {
+        alert('Please select a date.');
+        return false;
+    }
+
+    // Check if the selected date has already been marked
+    var attendanceMarked = "{{ attendance_marked }}";
+    if (attendanceMarked === 'True') {
+        alert('Attendance for this date has already been marked.');
+        return false;
+    }
+
+    // Check if the selected date is in the past
+    // if (selectedDate < today) {
+    //     alert('You cannot mark attendance for past dates.');
+    //     return false;
+    // }
+
+    // return true;
+}
+</script>
+</body>
+</html>
+{% endblock %}

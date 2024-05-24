@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Staff Dashboard</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2; /* Light gray background */
+            color: #333; /* Dark text color */
+        }
+
+        /* Top menu bar styles */
+        .top-menu {
+            position: static;
+            height: 59px;
+            background-color: skyblue; /* Sky blue top menu */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .college-logo {
+            max-height: 100%;
+        }
+
+        .staff-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .staff-info {
+            margin-right: 20px;
+        }
+
+        /* Side menu styles */
+        .sidenav {
+            height: calc(100vh - 59px); /* Adjusted height for the top menu */
+            width: 220px;
+            position: fixed;
+            z-index: 1;
+            top: 59px;
+            left: 0;
+            background-color: #333; /* Darker background for the side menu */
+            overflow-y: auto; /* Allow vertical scrolling */
+            transition: 0.5s;
+            padding-top: 20px;
+            color: white;
+        }
+
+        .sidenav a {
+            padding: 10px 16px; /* Adjusted padding */
+            text-decoration: none;
+            font-size: 16px;
+            color: white;
+            display: block;
+            width: 100%; /* Full width for the tabs */
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            background-color: #555; /* Darker color on hover */
+        }
+
+        /* Main content styles */
+        .main {
+            margin-top: 59px;
+            margin-left: 220px; /* Adjusted margin for the side menu */
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Spacing between elements */
+        }
+
+        /* Card styles */
+        .card {
+            flex: 0 0 calc(20% - 20px); /* Adjusted width for smaller cards */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            text-align: center;
+            background-color: white;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .card img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .card button {
+            background-color: skyblue;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .card button:hover {
+            background-color: #6191dd;
+        }
+
+        /* Card colors */
+        .card:nth-child(1) {
+            background-color: #ffcccc; /* Light red */
+        }
+
+        .card:nth-child(2) {
+            background-color: #ccffcc; /* Light green */
+        }
+
+        .card:nth-child(3) {
+            background-color: #ccccff; /* Light blue */
+        }
+
+        .card:nth-child(4) {
+            background-color: #ffffcc; /* Light yellow */
+        }
+
+        .card:nth-child(5) {
+            background-color: #ffccff; /* Light pink */
+        }
+
+        /* Student table styles */
+        table {
+            flex: 1; /* Flexible width for the table */
+            width: calc(80% - 20px); /* Adjusted width */
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #6191dd;
+            color: white;
+        }
+
+        /* Media query for responsiveness */
+        @media only screen and (max-width: 768px) {
+            .sidenav {
+                width: 100%;
+            }
+
+            .card {
+                flex: 0 0 100%; /* Full width for smaller screens */
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            table {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top menu bar -->
+    <div class="top-menu">
+      <img src="{% static "images/logo-wide.png" %}" alt="College Logo" class="college-logo">
+        <div class="staff-details">
+            <div class="staff-info">
+                <p>STAFF DASHBOARD</p>
+            </div>
+            <img src="{% static "images/staff22.png" %}" alt="Staff Photo" class="staff-photo" style = "width: 50px;">
+        </div>
+    </div>
+
+    <!-- Side menu -->
+    <div class="sidenav">
+      <a href="{% url 'staff_dashboard' %}">Home</a>
+      <a href="{% url 'students_list' %}">View Student Details</a>
+      <a href="{% url 'attendance' %}">Mark Attendance</a>
+      <a href="{% url 'attendance_details' %}">Manage Attendance</a>
+      <a href="{% url 'approval' %}">Registration Approval</a>
+      <a href="{% url 'index' %}">Logout</a>
+  </div>
+
+  {% block content %}
+  {% endblock %} 
+  

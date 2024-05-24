@@ -1,0 +1,114 @@
+{%extends 'base.html'%} {% load static %} {% block content %}
+    <section class="banner">
+      <img src="{% static "images/ST_Thomas_College_Thrissur.jpg" %}" alt="College Banner" />
+    </section>
+    <section class="welcome">
+      <div class="welcome-img">
+        <img src="{% static "images/4.jpg" %}" alt="College Wel Pic" />
+      </div>
+      <div class="welcome-text">
+        <h2>Welcome to <span>St. Thomas College</span> Ranni</h2>
+        <p>
+          The history of the college is embedded in the history of Ranni. The
+          college is situated on the top of a serene hill, in a sylvan
+          surrounding, away from the din and bustle of the city, is easily
+          accessible and is at a walkable distance from Ranni town
+        </p>
+        <div class="welcome-text-h3"><h3>Our Vision</h3></div>
+        <p>
+          To part take in the nation building process by providing holistic and
+          quality education to create spiritually inspired, morally upright,
+          intellectually enlightened and socially committed young adults who
+          love God and their country. Our Object
+        </p>
+      </div>
+    </section>
+    <section class="notification">
+      <h2>NOTIFICATION</h2>
+      <p>
+        Wanted Guest Lecturers in the Department of Physical Education. Contact
+        number 8301057965
+      </p>
+    </section>
+    <div class="p-bg">
+      <section class="news">
+        <h2>Latest News & Announcement</h2>
+        <div class="row">
+          <div class="column">
+            <img
+              src="{% static "images/af7076845b.jpeg" %}"
+              alt="Snow"
+              style="width: 100%"
+            />
+          </div>
+          <div class="column">
+            <img
+              src="{% static "images/news3.jpeg" %}"
+              alt="Forest"
+              style="width: 100%"
+            />
+          </div>
+          <div class="column">
+            <img
+              src="{% static "images/news2.jpeg" %}"
+              alt="Mountains"
+              style="width: 100%"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <img
+              src="{% static "images/news4.jpeg" %}"
+              alt="Snow"
+              style="width: 100%"
+            />
+          </div>
+          <div class="column">
+            <img
+              src="{% static "images/af7076845b.jpeg" %}"
+              alt="Forest"
+              style="width: 100%"
+            />
+          </div>
+          <div class="column">
+            <img
+              src="{% static "images/news1.jpeg" %}"
+              alt="Mountains"
+              style="width: 100%"
+            />
+          </div>
+        </div>
+        <button>VIEW ALL NEWS</button>
+      </section>
+    </div>
+    <div class="p-bg">
+      <section class="photo_gallery">
+        <h2>Our Photo Gallery</h2>
+        <div class="row">
+          <div class="column">
+            <img src="{% static "images/HI-X.jpg" %}" alt="Snow" style="width: 100%" />
+          </div>
+          <div class="column">
+            <img src="{% static "images/ECO-X.jpg" %}" alt="Forest" style="width: 100%" />
+          </div>
+          <div class="column">
+            <img src="{% static "images/commerce-X.jpg" %}" alt="Mountains" style="width: 100%" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <img src="{% static "images/Eng-X.jpg" %}" alt="Snow" style="width: 100%" />
+          </div>
+          <div class="column">
+            <img src="{% static "images/mca.jpg" %}" alt="Forest" style="width: 100%" />
+          </div>
+          <div class="column">
+            <img src="{% static "images/MCA-.webp" %}" alt="Mountains" style="width: 100%" />
+          </div>
+        </div>
+        <button>VIEW ALL PHOTOS</button>
+      </section>
+    </div>
+    <div class="p-bg">
+  {% endblock %}

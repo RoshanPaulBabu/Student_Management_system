@@ -1,0 +1,23 @@
+{%extends 's_base.html'%} {% load static %} {% block content %}
+   <div class="content">
+  <h2 style="text-align: center; color: #6191dd;">Approved Students</h2>
+  <table style="width: 80%; border-collapse: collapse; margin: 0 40px 0 auto;">
+    <tr style="background-color: #f2f2f2;">
+      <th style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">Roll Number</th>
+      <th style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">Name</th>
+      <th style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">Parent Contact</th>
+      <th style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">More Details</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+      <td style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">{{ student.roll_number }}</td>
+      <td style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">{{ student.name }}</td>
+      <td style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;">{{ student.contact }}</td>
+      <td style="padding: 15px; text-align: left; border-bottom: 1px solid #ddd;"><a href="{% url 'student_view' student.id %}" style="text-decoration: none; color: #2196F3;">More Details</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div> 
+  </body>
+  </html>
+  {% endblock %}

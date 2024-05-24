@@ -1,0 +1,127 @@
+{%extends 's_base.html'%} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .body {
+            width: 80%;
+            width: 80%;
+            margin: 0 40px 0 auto;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 0;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        form {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        label {
+            font-size: 18px;
+            color: #333;
+        }
+        input[type="date"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
+        input[type="submit"] {
+            background-color: #6191dd;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #6191dd;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #6191dd;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .anchor {
+            display: block;
+            width: 200px;
+            height: 50px;
+            margin: 20px auto;
+            background-color: #6191dd;
+            text-align: center;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            line-height: 50px;
+            text-decoration: none;
+        }
+        .anchor:hover {
+            background-color: #3d78d6;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+  <h1>Attendance Management</h1>
+    <form method="get">
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date" value="{{ date }}"><br><br>
+        <input type="submit" value="Show Attendance">
+    </form>
+    {% if present_students or absent_students %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Status</th>
+        </tr>
+        {% for student in present_students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.roll_number }}</td>
+            <td>Present</td>
+        </tr>
+        {% endfor %}
+        {% for student in absent_students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.roll_number }}</td>
+            <td>Absent</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'edit_attendance' date %}" class="anchor">Edit Attendance</a>
+    {% else %}
+    <p style = "color:red; text-align: center; font-weight: bolder;">Attendance is not marked for this day. Please mark attendance to manage the attendance.</p>
+    <a href="{% url 'attendance' %}" class="anchor">Mark Attendance</a>
+    {% endif %}
+</div>
+</body>
+</html>
+{% endblock %}

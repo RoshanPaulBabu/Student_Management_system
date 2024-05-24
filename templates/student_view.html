@@ -1,0 +1,74 @@
+{%extends 's_base.html'%} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 40%;
+        margin: 1% auto;
+        border-radius: 5px;
+      }
+
+      .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .container {
+        padding: 2px 16px;
+      }
+
+      .img {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="card">
+      {% if student.student_image %}
+      <img src="{{ student.student_image.url }}" alt="{{ student.name }}"  class="img"/>
+      {% endif %}
+      <div class="container">
+        <h1><b>{{ student.name }}</b></h1>
+        <p>Roll Number: {{ student.roll_number }}</p>
+        <p>Email: {{ student.email }}</p>
+        <p>Contact: {{ student.contact }}</p>
+        <p>Parent Name: {{ student.parent_name }}</p>
+        <p>Gender: {{ student.get_gender_display }}</p>
+        <p>Course: {{ student.get_course_display }}</p>
+        <p>Date of Birth: {{ student.date_of_birth }}</p>
+        <p>Registration Date: {{ student.registration_date }}</p>
+        <p>Total Present: {{ total_present }}</p>
+        <p>Total Absent: {{ total_absent }}</p>
+        <a
+          href="{% url 'delete_student' student.id %}"
+          style="text-decoration: none"
+          ><button
+            type="button"
+            style="
+              background-color: #f44336;
+              color: white;
+              padding: 5px 10px;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+            "
+          >
+            Delete
+          </button></a
+        >
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

@@ -1,0 +1,107 @@
+{%extends 's_base.html'%} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ student.name }}'s Attendance</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .body {
+            width: 80%;
+            margin: 0 40px 0 auto;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+        table {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .student-profile {
+            flex: 0 0 calc(25% - 20px); /* Adjusted width for better layout */
+            border: 1px solid #f8f5f5;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            text-align: center;
+            background-color: #e9e9e9;
+            margin-bottom: 20px;
+            z-index: 2; /* Ensure it's above the side menu */
+            color: #101010;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+    <h1>{{ student.name }}'s Attendance</h1>
+    <div class="student-profile">
+        ...
+        <p>Total Present Days: {{ total_present }}</p>
+        <p>Total Absent Days: {{ total_absent }}</p>
+        <p>Attendance Percentage: {{ percentage }}%</p>
+        ...
+        <div style="display: flex; justify-content: center;">
+            <canvas id="attendanceChart"></canvas>
+        </div>            
+    </div>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        {% for attendance in attendances %}
+        <tr>
+            <td>{{ attendance.date }}</td>
+            <td>{{ attendance.is_present|yesno:"Present,Absent" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        var ctx = document.getElementById('attendanceChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Present', 'Absent'],
+                datasets: [{
+                    data: [{{ total_present }}, {{ total_absent }}],
+                    backgroundColor: ['rgb(75, 192, 192)', 'rgb(255, 99, 132)'],
+                }]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            },
+        });
+        </script>
+</body>
+</div>
+</html>
+{% endblock %}

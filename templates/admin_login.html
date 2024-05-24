@@ -1,0 +1,98 @@
+{%extends 'base.html'%} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+
+        .bgc {
+            font-family: Arial, sans-serif;
+            background-color: rgba(114, 173, 215, 0.805);
+            padding: 50px 0 150px;
+        }
+
+        .container {
+            width: 325px;
+            margin: 0 auto;
+            margin-top: 100px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            width: 300px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="bgc">
+    <div class="container">
+        <h2>Staff Login</h2>
+        <form method="post" action="{% url 'admin_login' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Login">
+            {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+            {% endif %}
+        
+            {% if user.is_authenticated and user.is_staff %}
+            <p>Welcome</p>
+            {% endif %}
+        </form>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}

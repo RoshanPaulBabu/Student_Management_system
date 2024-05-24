@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <style>
+        /* Use a custom font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            font-weight: 500;
+        }
+        .detail-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .detail-group label {
+            font-weight: 400;
+            width: 150px;
+            margin-right: 10px;
+        }
+        .detail-group p {
+            font-weight: 300;
+            margin: 0;
+        }
+        /* Add a style for the form */
+        form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        /* Add a style for the buttons */
+        button {
+            display: inline-block;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        /* Add different colors for the approve and reject buttons */
+        button[name="action"][value="approve"] {
+            background-color: #4caf50;
+            color: #fff;
+        }
+        button[name="action"][value="reject"] {
+            background-color: #f44336;
+            color: #fff;
+            margin-left: 10px;
+        }
+        /* Add a style for the card */
+        .card {
+            width: 600px;
+            margin: 80px auto;
+            padding: 40px 0 30px 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        /* Add a style for the profile photo */
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: -30px auto 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Add a display: block property to the profile photo */
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Wrap the content in a card div -->
+    <div class="card">
+        <!-- Add a profile photo of the student on the top -->
+        <img src="{{ student.student_image.url }}" alt="Student Photo" class="profile-photo">
+        <div class="container">
+            <h2>Student Details</h2>
+            <div class="detail-group">
+                <label>Name:</label>
+                <p>{{ student.name }}</p>
+            </div>
+            <div class="detail-group">
+                <label>Roll Number:</label>
+                <p>{{ student.roll_number }}</p>
+            </div>
+            <div class="detail-group">
+                <label>Email:</label>
+                <p>{{ student.email }}</p>
+            </div>
+            <div class="detail-group">
+                <label>Contact:</label>
+                <p>{{ student.contact }}</p>
+            </div>
+            <div class="detail-group">
+                <label>Parent Name:</label>
+                <p>{{ student.parent_name }}</p>
+            </div>
+            <div class="detail-group">
+                <label>Gender:</label>
+                <p>{{ student.get_gender_display }}</p>
+            </div>
+            <div class="detail-group">
+                <label>Course:</label>
+                <p>{{ student.get_course_display }}</p>
+            </div>
+            <div class="detail-group">
+                <label>Date of Birth:</label>
+                <p>{{ student.date_of_birth }}</p>
+            </div>
+            <div class="detail-group">
+                <label>Registration Date:</label>
+                <p>{{ student.registration_date }}</p>
+            </div>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="student_id" value="{{ student.id }}">
+            <button type="submit" name="action" value="approve">Approve</button>
+            <button type="submit" name="action" value="reject">Reject</button>
+        </form>
+    </div>
+</body>
+</html>

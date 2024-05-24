@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ student.name }}'s Attendance</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Dark background */
+            color: #ffffff; /* White text color */
+        }
+
+        /* Top menu bar styles */
+        .top-menu {
+            height: 60px;
+            background-color: #0d0d0d; /* Dark top menu */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            
+        }
+
+        .college-logo {
+            max-height: 100%;
+        }
+
+        /* Side menu styles */
+        .sidenav {
+            height: 100vh;
+            width: 220px;
+            position: fixed;
+            z-index: 1;
+            top: 60px;
+            left: 0;
+            background-color: #0d0d0d; /* Dark side menu */
+            overflow-y: auto; /* Allow vertical scrolling */
+            transition: 0.5s;
+            padding-top: 20px;
+            color: #ffffff;
+        }
+
+        .sidenav a {
+            padding: 10px 16px; /* Adjusted padding */
+            text-decoration: none;
+            font-size: 16px;
+            color: #ffffff;
+            display: block;
+            width: 100%; /* Full width for the tabs */
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            background-color: #333333; /* Darker color on hover */
+        }
+
+        /* Attendance page specific styles */
+        .bodytable {
+            width: 80%;
+            margin: 60px auto 0; /* Adjusted margin for the top menu */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a; /* Dark background */
+            padding: 0;
+            color: #ffffff; /* White text color */
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff; /* White text color */
+            margin-top: 50px;
+            margin-left: 230px;
+        }
+
+        table {
+            width: 80%;
+            margin: 50px auto 0 230px;
+            background-color: #1a1a1a; /* Dark background */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            border-collapse: collapse;
+            color: #ffffff; /* White text color */
+        }
+
+        th, td {
+            border: 1px solid #333333; /* Dark border */
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0099ff; /* Blue header */
+            color: #ffffff; /* White text color */
+        }
+
+        tr:nth-child(even) {
+            background-color: #333333; /* Darker background for even rows */
+        }
+        .student-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .student-info {
+            margin-right: 20px;
+            color: #ffffff;
+        }
+
+        .student-profile {
+            flex: 0 0 calc(25% - 20px); /* Adjusted width for better layout */
+            border: 1px solid #333333;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            text-align: center;
+            background-color: #1a1a1a;
+            margin-bottom: 20px;
+            margin-left: 230px;
+            z-index: 2; /* Ensure it's above the side menu */
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top menu bar -->
+    <div style="overflow: hidden;">
+    <div class="top-menu">
+        <img src="{% static "images/logo-wide.png" %}" alt="College Logo" class="college-logo">
+        <div class="student-details">
+            <div class="student-info">
+                <p>{{ student.name }}  - {{ student.roll_number }}</p>
+            </div>
+            <img src="{{ student.student_image.url }}" alt="{{ student.name }}" style="border-radius: 50%; width: 40px; height: 40px;">
+        </div>
+    </div>
+</div>
+    <!-- Side menu -->
+    <div class="sidenav">
+        <a href={% url "student_dashboard" student.id %}>Home</a>
+        <a href="{% url 'st_attendance_detail' student.id %}">Attendance</a>
+        <a href="#marks">Marks</a>
+        <a href="#assignments">Assignments</a>
+        <a href="#feedback">Feedback</a>
+        <a href={% url "student_login" %}>Logout</a>
+    </div>
+
+    <!-- Attendance content -->
+    <div style="overflow-y: auto;">
+    <div class="bodytable" >
+        <div>
+        <h1>{{ student.name }}'s Attendance</h1>
+
+        <div class="student-profile">
+            ...
+            <p>Total Present Days: {{ total_present }}</p>
+            <p>Total Absent Days: {{ total_absent }}</p>
+            <p>Attendance Percentage: {{ percentage }}%</p>
+            ...
+            <div style="display: flex; justify-content: center;">
+                <canvas id="attendanceChart"></canvas>
+            </div>            
+        </div>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+            {% for attendance in attendances %}
+            <tr>
+                <td>{{ attendance.date }}</td>
+                <td>{{ attendance.is_present|yesno:"Present,Absent" }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+</div>
+
+<script>
+    var ctx = document.getElementById('attendanceChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Present', 'Absent'],
+            datasets: [{
+                data: [{{ total_present }}, {{ total_absent }}],
+                backgroundColor: ['rgb(75, 192, 192)', 'rgb(255, 99, 132)'],
+            }]
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        },
+    });
+    </script>
+</body>
+</html>

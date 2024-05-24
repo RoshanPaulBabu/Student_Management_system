@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eStudentManager</title>
+    <link rel="icon" type="image/x-icon" href="{% static "images/estud2.jpeg" %}">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open Sans"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="top_bar">
+        <div class="top_desp">
+          <p>Affiliated To Mahathma Gandhi University, Kottayam, Kerala</p>
+        </div>
+        <div class="div_top_list">
+          <ul class="ul_top_list">
+            <li>Feedback</li>
+            <li>|</li>
+            <li>Research</li>
+            <li>|</li>
+            <li>Virtual Classroom</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mid-color">
+        <div class="mid_bar">
+          <div class="logo_banner">
+            <img src="{% static "images/logo-wide.png" %}"  alt="college logo" />
+          </div>
+          <div class="email">
+            <ul>
+              <li>
+                <i
+                  class="fa fa-envelope"
+                  aria-hidden="true"
+                  style="font-size: 25px; color: #024c93"
+                ></i>
+                <a>CONTACT BY EMAIL</a>
+              </li>
+            </ul>
+          </div>
+          <div class="email">
+            <ul>
+              <li>
+                <i
+                  class="fa fa-phone"
+                  aria-hidden="true"
+                  style="font-size: 25px; color: #024c93"
+                ></i>
+                <a>+91 7994020875</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <nav class="nav-bar">
+        <ul class="menu-bar">
+          <a href={% url "index" %}><li class="{% if request.path == '/' %}active{% endif %}">Home</li></a>
+          <a href={% url "about" %}><li class="{% if request.path == '/about/' %}active{% endif %}">About</li></a>
+          <a><li>Admission</li></a>
+          <a><li>Academic</li></a>
+          <a href={% url "admin_login" %}><li class="{% if request.path == '/admin_login/' %}active{% endif %}">Admin</li></a>
+          <a href={% url "register" %}><li class="{% if request.path == '/register/' %}active{% endif %}">Register</li></a>
+          <a href={% url "student_login" %}><li class="{% if request.path == '/login/' %}active{% endif %}">Log-In</li></a>
+        </ul>
+      </nav>
+    </header>
+    {% block content %}
+    {% endblock %}
+    <footer>
+        <div class="footer_top">
+          <img src="{% static "images/logo-wide.png" %}" alt="college logo" />
+          <p>
+            The College is owned and managed by the St.Thomas Valiyapally,
+            Ranni, a parish church of The "Syrian Knanaya Arch Diocese" (a
+            Christian minority community) to meet the cultural and educational
+            needs of the soceity at large and of the said Christian minority
+            community in particular.
+          </p>
+          <i
+            class="fa fa-facebook"
+            aria-hidden="true"
+            style="
+              color: #f7f7f7;
+              font-size: 18px;
+              height: 32px;
+              line-height: 32px;
+              width: 32px;
+              margin: 5px 7px 5px 0;
+              text-align: center;
+              background-color: rgb(59, 89, 152);
+            "
+          ></i>
+          <i
+            class="fa fa-twitter"
+            aria-hidden="true"
+            style="
+              color: #f7f7f7;
+              font-size: 18px;
+              height: 32px;
+              line-height: 32px;
+              width: 32px;
+              margin: 5px 7px 5px 0;
+              text-align: center;
+              background-color: #076ccd;
+            "
+          ></i>
+          <i
+            class="fa fa-youtube"
+            aria-hidden="true"
+            style="
+              color: #f7f7f7;
+              font-size: 18px;
+              height: 32px;
+              line-height: 32px;
+              width: 32px;
+              margin: 5px 7px 5px 0;
+              text-align: center;
+              background-color: rgb(172, 25, 47);
+            "
+          ></i>
+          <i
+            class="fa fa-google-plus"
+            aria-hidden="true"
+            style="
+              color: #f7f7f7;
+              font-size: 18px;
+              height: 32px;
+              line-height: 32px;
+              width: 32px;
+              margin: 5px 7px 5px 0;
+              text-align: center;
+              background-color: rgb(255, 0, 21);
+            "
+          ></i>
+        </div>
+        <div class="bttm-lst">
+          <div class="bttm-li">
+            <h4>Useful Links</h4>
+            <ul>
+              <li>Home</li>
+              <li>Proforma</li>
+              <li>Results & Toppers</li>
+              <li>RTI</li>
+              <li>Structure</li>
+            </ul>
+          </div>
+          <div class="bttm-li">
+            <h4>Departments</h4>
+            <ul>
+              <li>Department of English</li>
+              <li>Department of Malayalam</li>
+              <li>Department of Hindi</li>
+              <li>Deaprtment of Physical Education</li>
+              <li>Department of Tourism</li>
+            </ul>
+          </div>
+          <div class="bttm-li">
+            <h4>Departments</h4>
+            <ul>
+              <li>Department of Physics</li>
+              <li>Department of Chemistry</li>
+              <li> Department of Zoologys</li>
+              <li>Department of Botany</li>
+              <li>Department of Economicss</li>
+            </ul>
+          </div>
+          <div class="bttm-li">
+            <h4 class="line-bottom">Programmes Offered</h4>
+            <ul>
+              <li>UG</li>
+              <li>PG</li>
+              <li>Add-On Courses</li>
+              <li>Open Courses</li>
+              <li>Common Courses</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer_bottom">
+          <p>Copyright ©2022 St. Thomas College, Ranni</p>
+          <p>Developed By Roshan Paul Babu</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

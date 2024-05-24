@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thanks for Registering</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #4b3ac8;
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.animated-image {
+  width: 200px;
+  height: auto;
+  animation: fadeIn 2s ease-in-out;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add a style for the go home button */
+.go-home {
+  display: inline-block;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #5d4ddb;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Thanks for registering!</h2>
+    <p>You will receive your credentials once the registration is approved.</p>
+    <img src="{% static "images/logo-wide.png" %}" alt="Registration" class="animated-image">
+    <br>
+    <!-- Add a go home button that redirects to the home page -->
+    <button class="go-home" onclick="window.location.href='/'">Go Home</button>
+  </div>
+</body>
+</html>

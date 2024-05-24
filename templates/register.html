@@ -1,0 +1,103 @@
+{%extends 'base.html'%} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Registration</title>
+
+    <style>
+      .body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #c3d7f3;
+      }
+      .container {
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h2 {
+        color: #333;
+      }
+      form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 4px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        margin-bottom: 5px;
+      }
+      .form-group input {
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+      input[type="submit"] {
+        background-color: #024c93;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 160px;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      .form-group select,
+      .form-group input[type="date"] {
+        width: 200px;
+      }
+
+      .error {
+        color: red;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="body">
+    <div class="container">
+      <h2>Student Registration</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }} {% if field.errors %}
+          <div class="error">{{ field.errors.as_text }}</div>
+          {% endif %}
+        </div>
+        {% endfor %} {% if form.non_field_errors %}
+        <div class="error">{{ form.non_field_errors }}</div>
+        {% endif %}
+        <input type="checkbox" onclick="showPassword()" /> Show Password
+        <div style="margin-left: 40%;">
+        <input type="submit" onclick="showSuccessMessage()" value="Register" /> 
+        </div>     
+      </form>
+
+      <script>
+        function showPassword() {
+          var passwordField = document.getElementById("id_password");
+          var confirmPasswordField = document.getElementById(
+            "id_confirm_password"
+          );
+          if (passwordField.type === "password") {
+            passwordField.type = "text";
+            confirmPasswordField.type = "text";
+          } else {
+            passwordField.type = "password";
+            confirmPasswordField.type = "password";
+          }
+        }
+      </script>
+    </div>
+  </div>
+  </body>
+</html>
+{% endblock %}

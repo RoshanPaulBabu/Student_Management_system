@@ -1,0 +1,142 @@
+{%extends 's_base.html'%} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .body {
+        width: 80%;
+        margin: 0 40px 0 auto;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-top: 50px;
+      }
+      form {
+        width: 80%;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        font-size: 18px;
+        color: #333;
+      }
+      input[type="date"],
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 18px;
+      }
+      input[type="submit"] {
+        background-color: #6191dd;
+        color: #fff;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #6191dd;
+      }
+      table {
+        width: 100%;
+        margin-top: 50px;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: left;
+      }
+      th {
+        background-color: #6191dd;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .status-button {
+        background-color: #6191dd;
+        border: none;
+        color: white;
+        padding: 10px 24px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+      .status-button:hover {
+        background-color: #6191dd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="body">
+      <h1>Attendance Details</h1>
+      <form method="get">
+        <label for="date">Date:</label><br />
+        <input
+          type="date"
+          id="date"
+          name="date"
+          value="{{ date }}"
+        /><br /><br />
+        <input type="submit" value="Show Attendance" />
+      </form>
+      <form method="post">
+        {% csrf_token %}
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Status</th>
+          </tr>
+          {% for form in forms %}
+          <tr>
+            <td>{{ form.instance.student.name }}</td>
+            <td>{{ form.instance.student.roll_number }}</td>
+            <td>
+              <button
+                type="button"
+                class="status-button"
+                onclick="changeStatus(this)"
+              >
+                {{ form.instance.is_present|yesno:"Present,Absent" }}
+              </button>
+              {{ form.is_present.as_hidden }}
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+        <input type="submit" value="Update Attendance" />
+      </form>
+    </div>
+    <script>
+      function changeStatus(button) {
+        var isPresentInput = button.nextElementSibling;
+        var isPresent = isPresentInput.value === "true";
+        isPresentInput.value = String(!isPresent);
+        if (!isPresent) {
+          button.textContent = "Present";
+          button.style.backgroundColor = ""; // Reset to default color for "Present"
+        } else {
+          button.textContent = "Absent";
+          button.style.backgroundColor = "red"; // Change color to red for "Absent"
+        }
+      }
+    </script>
+  </body>
+</html>
+{% endblock %}

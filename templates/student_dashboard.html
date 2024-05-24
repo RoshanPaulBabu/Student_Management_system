@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Dark background */
+            color: #ffffff; /* White text color */
+        }
+
+        /* Top menu bar styles */
+        .top-menu {
+            height: 60px;
+            background-color: #0d0d0d; /* Dark top menu */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .college-logo {
+            max-height: 100%;
+        }
+
+        .student-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .student-info {
+            margin-right: 20px;
+            color: #ffffff;
+        }
+
+        /* Side menu styles */
+        .sidenav {
+            height: calc(100vh - 60px); /* Adjusted height for the top menu */
+            width: 220px;
+            position: fixed;
+            z-index: 1;
+            top: 60px;
+            left: 0;
+            background-color: #0d0d0d; /* Dark side menu */
+            overflow-y: auto; /* Allow vertical scrolling */
+            transition: 0.5s;
+            padding-top: 20px;
+            color: #ffffff;
+        }
+
+        .sidenav a {
+            padding: 10px 16px; /* Adjusted padding */
+            text-decoration: none;
+            font-size: 16px;
+            color: #ffffff;
+            display: block;
+            width: 100%; /* Full width for the tabs */
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            background-color: #333333; /* Darker color on hover */
+        }
+
+        /* Student profile card styles */
+        .dashboard {
+            margin-top: 60px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Spacing between elements */
+            margin-left: 220px; /* Added margin to avoid overlap */
+        }
+
+        .student-profile {
+            flex: 0 0 calc(25% - 20px); /* Adjusted width for better layout */
+            border: 1px solid #333333;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            text-align: center;
+            background-color: #1a1a1a;
+            margin-bottom: 20px;
+            z-index: 2; /* Ensure it's above the side menu */
+            color: #ffffff;
+        }
+
+        .student-profile img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .student-profile button {
+            background-color: #0099ff; /* Blue button */
+            color: #ffffff;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .student-profile button:hover {
+            background-color: #66b3ff; /* Lighter blue on hover */
+        }
+
+        /* Timetable styles */
+        table {
+            flex: 1; /* Flexible width for the timetable */
+            width: calc(75% - 20px); /* Adjusted width */
+            border-collapse: collapse;
+            margin-top: 20px;
+            z-index: 1; /* Ensure it's below the student card */
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        th, td {
+            border: 1px solid #333333;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0099ff; /* Blue header */
+            color: #ffffff;
+        }
+
+        /* Media query for responsiveness */
+        @media only screen and (max-width: 768px) {
+            .sidenav {
+                width: 100%;
+            }
+
+            .student-profile {
+                flex: 0 0 100%; /* Full width for smaller screens */
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            table {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top menu bar -->
+    <div class="top-menu">
+        <img src="{% static "images/logo-wide.png" %}" alt="College Logo" class="college-logo">
+        <div class="student-details">
+            <div class="student-info">
+                <p>{{ student.name }}  - {{ student.roll_number }}</p>
+            </div>
+            <img src="{{ student.student_image.url }}" alt="{{ student.name }}" style="border-radius: 50%; width: 40px; height: 40px;">
+        </div>
+    </div>
+
+    <!-- Side menu -->
+    <div class="sidenav">
+        <a href={% url "index" %}>Home</a>
+        <a href="{% url 'st_attendance_detail' student.id %}">Attendance</a>
+        <a href="#marks">Marks</a>
+        <a href="#assignments">Assignments</a>
+        <a href="#feedback">Feedback</a>
+        <a href={% url "student_login" %}>Logout</a>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+        <!-- Student profile card -->
+        <div class="student-profile">
+                {% if student.student_image %}
+                <img src="{{ student.student_image.url }}" alt="{{ student.name }}">
+                {% else %}
+                <img src="https://via.placeholder.com/100" alt="Student Image">
+                {% endif %}
+                <h2>{{ student.name }}</h2>
+                <p>Roll Number: {{ student.roll_number }}</p>
+                <p>Course: {{ student.get_course_display }}</p>
+                <p>Total Attendance: {{ total_present }}</p>
+                <p>Attendance Percentage: {{ percentage }}%</p>
+            <button onclick="location.href='{% url 's_student_detail' student.id %}'">Edit Profile</button>
+        </div>
+
+        <!-- Timetable -->
+        <table>
+            <caption>Timetable</caption>
+            <tr>
+                <th>Day</th>
+                <th>9:00 - 10:00</th>
+                <th>10:00 - 11:00</th>
+                <th>11:00 - 12:00</th>
+                <th>12:00 - 1:00</th>
+                <th>1:00 - 2:00</th>
+                <th>2:00 - 3:00</th>
+                <th>3:00 - 4:00</th>
+            </tr>
+            <tr>
+                <td>Monday</td>
+                <td>Maths</td>
+                <td>Physics</td>
+                <td>Chemistry</td>
+                <td>Lunch</td>
+                <td>English</td>
+                <td>Computer</td>
+                <td>Lab</td>
+            </tr>
+            <tr>
+                <td>Tuesday</td>
+                <td>Physics</td>
+                <td>Maths</td>
+                <td>English</td>
+                <td>Lunch</td>
+                <td>Chemistry</td>
+                <td>Computer</td>
+                <td>Lab</td>
+            </tr>
+            <tr>
+                <td>Wednesday</td>
+                <td>Chemistry</td>
+                <td>Physics</td>
+                <td>Maths</td>
+                <td>Lunch</td>
+                <td>Computer</td>
+                <td>English</td>
+                <td>Lab</td>
+            </tr>
+            <tr>
+                <td>Thursday</td>
+                <td>English</td>
+                <td>Chemistry</td>
+                <td>Physics</td>
+                <td>Lunch</td>
+                <td>Maths</td>
+                <td>Computer</td>
+                <td>Lab</td>
+            </tr>
+            <tr>
+                <td>Friday</td>
+                <td>Computer</td>
+                <td>English</td>
+                <td>Chemistry</td>
+                <td>Lunch</td>
+                <td>Physics</td>
+                <td>Maths</td>
+                <td>Lab</td>
+            </tr>
+        </table>
+    </div>
+        
+</body>
+</html>

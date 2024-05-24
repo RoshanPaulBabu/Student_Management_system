@@ -1,0 +1,23 @@
+
+
+1. Name: John Doe, Email: john.doe1@example.com, Contact: 1234567890, Parent Name: Jane Doe, Gender: M, Course: MCA, Date of Birth: 2000-01-01, Password: Password@123
+2. Name: Jane Smith, Email: jane.smith2@example.com, Contact: 2345678901, Parent Name: John Smith, Gender: F, Course: MBA, Date of Birth: 2000-02-02, Password: Password@234
+3. Name: Robert Johnson, Email: robert.johnson3@example.com, Contact: 3456789012, Parent Name: Mary Johnson, Gender: M, Course: MMH, Date of Birth: 2000-03-03, Password: Password@345
+4. Name: Mary Williams, Email: mary.williams4@example.com, Contact: 4567890123, Parent Name: Robert Williams, Gender: F, Course: MA, Date of Birth: 2000-04-04, Password: Password@456
+5. Name: James Brown, Email: james.brown5@example.com, Contact: 5678901234, Parent Name: Linda Brown, Gender: M, Course: MSW, Date of Birth: 2000-05-05, Password: Password@567
+6. Name: Linda Davis, Email: linda.davis6@example.com, Contact: 6789012345, Parent Name: James Davis, Gender: F, Course: MCMS, Date of Birth: 2000-06-06, Password: Password@678
+7. Name: Michael Miller, Email: michael.miller7@example.com, Contact: 7890123456, Parent Name: Patricia Miller, Gender: M, Course: MCA, Date of Birth: 2000-07-07, Password: Password@789
+8. Name: Patricia Wilson, Email: patricia.wilson8@example.com, Contact: 8901234567, Parent Name: Michael Wilson, Gender: F, Course: MBA, Date of Birth: 2000-08-08, Password: Password@890
+9. Name: William Moore, Email: william.moore9@example.com, Contact: 9012345678, Parent Name: Elizabeth Moore, Gender: M, Course: MMH, Date of Birth: 2000-09-09, Password: Password@901
+10. Name: Elizabeth Taylor, Email: elizabeth.taylor10@example.com, Contact: 0123456789, Parent Name: William Taylor, Gender: F, Course: MA, Date of Birth: 2000-10-10, Password: Password@012
+
+23SR1	John Doe		Password@123
+23SR2	Jane Smith		Password@234
+23SR3	Robert Johnson		Password@345
+23SR4	Mary Williams		Password@456
+23SR5	James Brown		Password@567
+23SR6	Linda Davis		Password@678
+23SR7	Michael Miller		Password@789
+23SR8	Patricia Wilson		Password@890
+23SR9	William Moore		Password@901
+23SR10	Elizabeth Taylor	Password@012

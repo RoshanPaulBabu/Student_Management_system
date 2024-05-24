@@ -1,0 +1,299 @@
+body {
+  margin: 0;
+  font-family: 'Open Sans';font-size: 14px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
+
+.top_bar {
+  display: flex;
+  background-color: #024c93;
+  color: aliceblue;
+  height: 32px;
+}
+
+.top_desp {
+  width: 75%;
+  float: left;
+}
+
+.top_desp p {
+  margin: 5px 5px;
+  margin-left: 200px;
+}
+
+.div_top_list {
+  width: 50%;
+}
+
+.ul_top_list {
+  margin: 5px 5px;
+  margin-right: 200px;
+}
+
+.ul_top_list li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.logo_banner img {
+  width: 460.5px;
+  height: 97.6px;
+}
+
+.mid_bar {
+    display: flex;
+    margin-left: 10%;
+    margin-right: 20%;
+    height: 94.5px;
+}
+
+.mid_bar li{
+    display: flex;
+    text-decoration: none;
+}
+
+.mid_bar a{
+    display: block;
+}
+
+.email {
+  margin-left: 100px;
+  margin-top: 25px;
+}
+
+.mid-color {
+  background-color: #f0eded;
+  height: 112.12px;
+  text-align: center;
+} 
+
+.menu-bar li{
+  display: inline-block;
+  padding: 8px 46px;
+  font-weight: 600;
+}
+
+.menu-bar li:hover {
+  background-color: #024c93;
+  color: aliceblue;
+}
+
+.menu-bar li.active {
+  background-color: #024c93;
+  color: white;
+}
+
+.menu-bar li.active a{
+  background-color: #024c93;
+  color: white;
+}
+
+
+.menu-bar li:hover a{
+  text-decoration: none;
+  color: white; 
+}
+
+.menu-bar {
+  text-align: center;
+  /* margin: 0 200px 0 50px; */
+}
+
+.banner img{
+  width: 1519px;
+  height: 600px;
+  object-fit: cover;
+}
+.banner {
+  margin-bottom: 50px;
+}
+
+.welcome img{
+  width: 555px; 
+  height: 370 px;
+}
+.welcome {
+  display: flex;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.welcome-img {
+  margin-right: 30px;
+}
+
+.welcome-text h2{
+  font-size: 30px;
+  font-weight: 700;
+  font-family: 'Droid Serif', sans-serif;
+}
+
+.welcome-text span{
+  color: #024c93;
+}
+
+.welcome-text h3{
+  background-color: #032748;
+  color: white;
+  padding: 10px;
+}
+
+.notification {
+  text-align: center;
+}
+
+.notification {
+  font-weight: 700;
+  font-family: 'Droid Serif', sans-serif;
+  margin: 100px 0;
+}
+
+.notification p{
+  font-size: 18px;
+}
+
+.notification h2{
+  color:#024c93;
+  font-size: 30px;
+}
+
+.news h2{
+  text-align: center;
+  font-weight: 700;
+  font-family: 'Droid Serif', sans-serif;
+  font-size: 30px;
+  color:#024c93;
+  margin-bottom: 50px;
+}
+
+.news img{
+  width: 360;
+  height: 480;
+}
+
+.news {
+  width: 80%;
+  margin: 0 auto 50px;
+}
+
+.column {
+  margin: 10px;
+}
+
+.news button{
+  width: 40%;
+  height: 32.8px;
+  margin-left: 30%;
+  margin-right: 30%;
+  color: white;
+  background-color: #024c93;
+  font-weight: 700;
+  font-family: 'Droid Serif', sans-serif;
+  font-size: 15px;
+  border: 0;
+  border-radius: 3%;
+}
+
+.photo_gallery h2{
+  text-align: center;
+  font-weight: 700;
+  font-family: 'Droid Serif', sans-serif;
+  font-size: 30px;
+  color:#024c93;
+  margin-bottom: 50px;
+}
+
+.p-bg {
+  padding-top: 50px;
+}
+
+.photo_gallery img{
+  width: 377;
+  height: 264;
+}
+
+.photo_gallery {
+  width: 80%;
+  margin: 0 auto 50px;  
+}
+
+.p-bg {
+  background: linear-gradient(0deg, white, rgb(243, 241, 241) 80%) ;
+}
+
+.photo_gallery button{
+  width: 40%;
+  height: 32.8px;
+  margin-left: 30%;
+  margin-right: 30%;
+  color: white;
+  background-color: #024c93;
+  font-weight: 700;
+  font-family: 'Droid Serif', sans-serif;
+  font-size: 15px;
+  border: 0;
+  border-radius: 3%;
+}
+
+.footer_top img{
+    width: 460.5px;
+    height: 97.6px;
+}
+
+.footer_top {
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.footer_bottom {
+  display: flex;
+  background-color: #024c93;
+  height: 30px;
+}
+
+.footer_bottom p{
+  margin-bottom: 0;
+  color: white;
+  margin: 0 250px;
+}
+
+.bttm-lst {
+  display: flex;
+  width: 80%;
+  margin: 50px auto 100px;
+  color: #808080;
+}
+
+.bttm-li ul{
+  width: 262px;
+}
+
+.bttm-li li{
+  border-bottom: 1px dashed #333333;
+  list-style: none;
+  border-width: thin;
+  padding: 10px 0;
+  height: 24.6px;
+}
+.bttm-li h4{
+  color: #06396b;
+  margin-left: 40px;
+  font-weight: 700;
+  border-bottom-style: double;
+  padding-bottom: 10px;
+}

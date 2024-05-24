@@ -1,0 +1,68 @@
+{%extends 's_base.html'%} {% load static %} {% block content %}
+
+    <!-- Main content -->
+    <div class="main">
+        <!-- Card for marking student attendance -->
+
+        <div class="card">
+          <img src="{% static "images/logo-wide.png" %}" alt="Details Icon">
+          <h3>View Student Details</h3>
+          <p>View the personal and academic details of your students and contact them if needed.</p>
+          <button onclick="location.href='{% url 'students_list' %}'">Go to Details</button>
+       </div>
+
+        <div class="card">
+            <img src="{% static "images/logo-wide.png" %}" alt="Attendance Icon">
+            <h3>Mark Attendance</h3>
+            <p>Mark the attendance of your students for each class and view the attendance report.</p>
+            <button onclick="location.href='{% url 'attendance' %}'">Go to Attendance</button>
+        </div>
+
+        <!-- Card for viewing student details -->
+        
+
+        <!-- Card for managing attendance -->
+        <div class="card">
+            <img src="{% static "images/logo-wide.png" %}" alt="Approval Icon">
+            <h3>Manage Attendance</h3>
+            <p>Approve or reject the registration requests of your students for the next semester.</p>
+            <button onclick="location.href='{% url 'attendance_details' %}'">Manage</button>
+        </div>
+
+        <!-- Card for approving registration -->
+        <div class="card">
+            <img src="{% static "images/logo-wide.png" %}" alt="Approval Icon">
+            <h3>Registration Approval</h3>
+            <p>Approve or reject the registration requests of your students for the next semester.</p>
+            <button onclick="location.href='{% url 'approval' %}'">Approve</button>
+        </div>
+
+        <!-- Student table -->
+        <table>
+            <caption>Student Attendance Report</caption>
+            <tr>
+                <th>Roll Number</th>
+                <th>Name</th>
+                <th>Total Presents</th>
+                <th>Total Absents</th>
+                <th>Percentage</th>
+                <th>Details</th>
+            </tr>
+            {% for student, total_present, total_absent, percentage in student_attendance %}
+            <tr>
+                <td>{{ student.roll_number }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ total_present }}</td>
+                <td>{{ total_absent }}</td>
+                <td style="color: {% if percentage < 60 %}red{% else %}black{% endif %};">{{ percentage }}%</td>
+                <td>
+                <a href="{% url 's_attendance_detail' student.id %}">View Details</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</body>
+</html>
+{% endblock %}
