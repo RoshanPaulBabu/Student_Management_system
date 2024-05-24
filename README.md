@@ -17,7 +17,7 @@ The Student Management System provides the following features:
 
 ### Student Login and Registration Page
 ![Student Registration](screenshots/image.png)
-![Student Registration](screenshots/image1.png)
+![Student Registration](screenshots/image1.jpg)
 
 ### Admin Dashboard - Student Approval
 ![Admin Dashboard](screenshots/admin_dashboard.png)
