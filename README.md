@@ -22,8 +22,11 @@ The Student Management System provides the following features:
 ### Admin Dashboard - Student Approval
 ![Admin Dashboard](screenshots/image3.jpg)
 
+### Student Dashboard
+![Student Attendance](screenshots/image4.jpg)
+
 ### Student Attendance Detail
-![Student Attendance](screenshots/student_attendance_detail.png)
+![Student Attendance](screenshots/image5.jpg)
 
 
 ## Set Up Email Backend
